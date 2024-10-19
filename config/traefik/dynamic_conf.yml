@@ -12,7 +12,9 @@ http:
       entryPoints:
         - websecure
       service: bankapp-service
-      tls: {}
+      tls:
+        domains:
+          - main: "bank.powerzio.net"
     wallapp-router-http:
       rule: "Host(`wall.powerzio.net`)"
       entryPoints:
@@ -25,7 +27,9 @@ http:
       entryPoints:
         - websecure
       service: wallapp-service
-      tls: {}
+      tls:
+        domains:
+          - main: "wall.powerzio.net"
     cdnapp-router-http:
       rule: "Host(`cdn.powerzio.net`)"
       entryPoints:
@@ -38,12 +42,9 @@ http:
       entryPoints:
         - websecure
       service: cdnapp-service
-      tls: {}
-    gfapp-router-http:
-      rule: "Host(`admin.powerzio.net`)"
-      entryPoints:
-        - web
-      service: gf-service
+      tls:
+        domains:
+          - main: "cdn.powerzio.net"
 
   services:
     bankapp-service:
@@ -58,10 +59,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://cdn-app:80"
-    gf-service:
-      loadBalancer:
-        servers:
-          - url: "http://grafana:3000"
 
   middlewares:
     redirect-to-https:
@@ -73,7 +70,19 @@ tls:
   certificates:
     - certFile: "/certs/bank-app.crt"
       keyFile: "/certs/bank-app.key"
-    - certFile: "/certs/wall.crt"
-      keyFile: "/certs/wall.key"
-    - certFile: "/certs/cdn.crt"
-      keyFile: "/certs/cdn.key"
+      stores:
+        - default
+      domains:
+        - main: "bank.powerzio.net"
+    - certFile: "/certs/wall-app.crt"
+      keyFile: "/certs/wall-app.key"
+      stores:
+        - default
+      domains:
+        - main: "wall.powerzio.net"
+    - certFile: "/certs/cdn-app.crt"
+      keyFile: "/certs/cdn-app.key"
+      stores:
+        - default
+      domains:
+        - main: "cdn.powerzio.net"
