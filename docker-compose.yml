@@ -28,8 +28,6 @@ services:
       - "./config/bind9/named.conf.local:/etc/bind/named.conf.local"
       - "./config/bind9/named.conf.options:/etc/bind/named.conf.options"
       - "./config/bind9/db.powerzio.net:/etc/bind/db.powerzio.net"
-    networks:
-      - bind9-network
   bank-app:
     container_name: bank-app
     build:
@@ -54,9 +52,9 @@ services:
     volumes:
       - "./apps/cdn-app:/usr/share/nginx/html"
       - "./config/cdn-app/nginx.conf:/etc/nginx/nginx.conf"
+    networks:
+      - traefik-network
 
 networks:
   traefik-network:
-    driver: bridge
-  bind9-network:
     driver: bridge
