@@ -71,8 +71,8 @@ http:
 
 tls:
   certificates:
-    - certFile: "/certs/bank.crt"
-      keyFile: "/certs/bank.key"
+    - certFile: "/certs/bank-app.crt"
+      keyFile: "/certs/bank-app.key"
     - certFile: "/certs/wall.crt"
       keyFile: "/certs/wall.key"
     - certFile: "/certs/cdn.crt"
