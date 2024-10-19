@@ -68,8 +68,8 @@ http:
 
 tls:
   certificates:
-    - certFile: "/certs/bank-app.crt"
-      keyFile: "/certs/bank-app.key"
+    - certFile: "/certs/bank.powerzio.net.crt"
+      keyFile: "/certs/bank.powerzio.net.key"
       stores:
         - default
       domains:
