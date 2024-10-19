@@ -1,4 +1,14 @@
 services:
+  bind9:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: bind9
+    restart: always
+    ports:
+      - "10.0.0.11:53:53/tcp"
+      - "10.0.0.11:53:53/udp"
+    volumes:
+      - "./config/bind9/named.conf.local:/etc/bind/named.conf.local"
+      - "./config/bind9/db.powerzio.net:/etc/bind/db.powerzio.net"
   bank-app:
     container_name: bank-app
     build:
