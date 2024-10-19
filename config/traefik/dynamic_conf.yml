@@ -67,6 +67,11 @@ http:
         permanent: true
 
 tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: "/certs/bank.powerzio.net.crt"
+        keyFile: "/certs/bank.powerzio.net.key"
   certificates:
     - certFile: "/certs/bank.powerzio.net.crt"
       keyFile: "/certs/bank.powerzio.net.key"
