@@ -1,0 +1,9 @@
+options {
+    directory "/var/cache/bind";
+
+    recursion yes;
+    allow-query { 10.0.0.0/16; localhost; };
+    allow-recursion { 10.0.0.0/16; localhost; };
+    listen-on { 10.0.0.11; };
+    listen-on-v6 { none; };
+};
