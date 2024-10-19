@@ -70,19 +70,3 @@ tls:
   certificates:
     - certFile: "/certs/bank.powerzio.net.crt"
       keyFile: "/certs/bank.powerzio.net.key"
-      stores:
-        - default
-      domains:
-        - main: "bank.powerzio.net"
-    - certFile: "/certs/wall-app.crt"
-      keyFile: "/certs/wall-app.key"
-      stores:
-        - default
-      domains:
-        - main: "wall.powerzio.net"
-    - certFile: "/certs/cdn-app.crt"
-      keyFile: "/certs/cdn-app.key"
-      stores:
-        - default
-      domains:
-        - main: "cdn.powerzio.net"
