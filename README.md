@@ -53,3 +53,7 @@ sudo apt update
  sudo usermod -aG docker $USER
 
  newgrp docker
+
+ sudo systemctl stop systemd-resolved
+
+ sudo systemctl disable systemd-resolved

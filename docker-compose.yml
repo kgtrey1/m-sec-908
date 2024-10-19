@@ -25,9 +25,12 @@ services:
       - "10.0.0.11:53:53/tcp"
       - "10.0.0.11:53:53/udp"
     volumes:
+      - "./config/bind9/named.conf:/etc/bind/named.conf"
       - "./config/bind9/named.conf.local:/etc/bind/named.conf.local"
       - "./config/bind9/named.conf.options:/etc/bind/named.conf.options"
       - "./config/bind9/db.powerzio.net:/etc/bind/db.powerzio.net"
+    networks:
+      - bind9-network
   bank-app:
     container_name: bank-app
     build:
@@ -46,4 +49,6 @@ services:
 
 networks:
   traefik-network:
+    driver: bridge
+  bind9-network:
     driver: bridge
