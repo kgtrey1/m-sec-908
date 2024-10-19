@@ -22,8 +22,8 @@ services:
     container_name: bind9
     restart: always
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      - "10.0.0.11:53:53/tcp"
+      - "10.0.0.11:53:53/udp"
     volumes:
       - "./config/bind9/named.conf:/etc/bind/named.conf"
       - "./config/bind9/named.conf.local:/etc/bind/named.conf.local"
@@ -44,6 +44,7 @@ services:
       - "traefik.http.routers.bankapp.rule=Host(`bank.powerzio.net`)"
       - "traefik.http.routers.bankapp.entrypoints=web"
       - "traefik.http.services.bankapp.loadbalancer.server.port=5000"
+      - "traefik.docker.network=traefik-network"
     networks:
       - traefik-network
 
