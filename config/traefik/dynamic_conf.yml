@@ -27,6 +27,19 @@ http:
         - websecure
       service: wallapp-service
       tls: {}
+    cdnapp-router-http:
+      rule: "Host(`cdn.powerzio.net`)"
+      entryPoints:
+        - web
+      service: cdnapp-service
+      middlewares:
+        - redirect-to-https
+    cdnapp-router-https:
+      rule: "Host(`cdn.powerzio.net`)"
+      entryPoints:
+        - websecure
+      service: cdnapp-service
+      tls: {}
 
   services:
     bankapp-service:
@@ -37,6 +50,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://wall-app:80"
+    cdnapp-service:
+      loadBalancer:
+        servers:
+          - url: "http://cdn-app:80"
 
   middlewares:
     redirect-to-https:
@@ -50,3 +67,5 @@ tls:
       keyFile: "/certs/bank.key"
     - certFile: "/certs/wall.crt"
       keyFile: "/certs/wall.key"
+    - certFile: "/certs/cdn.crt"
+      keyFile: "/certs/cdn.key"
