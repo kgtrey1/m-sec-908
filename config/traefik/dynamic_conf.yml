@@ -32,7 +32,7 @@ http:
     bankapp-service:
       loadBalancer:
         servers:
-          - url: "http://wall-app:80"
+          - url: "http://bank-app:5000"
     wallapp-service:
       loadBalancer:
         servers:
