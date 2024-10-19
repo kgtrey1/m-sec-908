@@ -9,8 +9,8 @@ services:
       - "--providers.file.filename=/etc/traefik/dynamic_conf.yml"
       - "--entrypoints.websecure.http.tls=true"
     ports:
-      - "10.0.0.11:80:80"
-      - "10.0.0.11:443:443"
+      - "80:80"
+      - "443:443"
     volumes:
       - "./config/traefik/certs:/certs"
       - "./config/traefik/dynamic_conf.yml:/etc/traefik/dynamic_conf.yml"
@@ -22,8 +22,8 @@ services:
     container_name: bind9
     restart: always
     ports:
-      - "10.0.0.11:53:53/tcp"
-      - "10.0.0.11:53:53/udp"
+      - "53:53/tcp"
+      - "53:53/udp"
     volumes:
       - "./config/bind9/named.conf:/etc/bind/named.conf"
       - "./config/bind9/named.conf.local:/etc/bind/named.conf.local"
