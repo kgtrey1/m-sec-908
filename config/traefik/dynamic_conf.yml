@@ -1,6 +1,33 @@
+http:
+  routers:
+    bankapp-router-http:
+      rule: "Host(`bank.powerzio.net`)"
+      entryPoints:
+        - web
+      service: bankapp-service
+      middlewares:
+        - redirect-to-https
+
+    bankapp-router-https:
+      rule: "Host(`bank.powerzio.net`)"
+      entryPoints:
+        - websecure
+      service: bankapp-service
+      tls: {}
+
+  services:
+    bankapp-service:
+      loadBalancer:
+        servers:
+          - url: "http://bank-app:5000"
+
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
 tls:
   certificates:
     - certFile: "/certs/bank.crt"
       keyFile: "/certs/bank.key"
-    - certFile: "/certs/wall.crt"
-      keyFile: "/certs/wall.key"

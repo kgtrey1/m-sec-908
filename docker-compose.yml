@@ -4,25 +4,18 @@ services:
     container_name: traefik
     restart: always
     command:
-      - "--api.insecure=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--providers.file.filename=/etc/traefik/dynamic_conf.yml"
-      - "--entrypoints.websecure.http.tls=true"
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - "./config/traefik/certs:/certs"
       - "./config/traefik/dynamic_conf.yml:/etc/traefik/dynamic_conf.yml"
+      - "./config/traefik/certs:/certs"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - traefik-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`3.35.47.238`)"
-      - "traefik.http.routers.dashboard.entrypoints=web"
-      - "traefik.http.routers.dashboard.service=api@internal"
   bind9:
     image: internetsystemsconsortium/bind9:9.18
     container_name: bind9
@@ -45,12 +38,6 @@ services:
     restart: always
     volumes:
       - ./apps/bank-app:/var/www/app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.bankapp.rule=Host(`bank.powerzio.net`)"
-      - "traefik.http.routers.bankapp.entrypoints=web"
-      - "traefik.http.services.bankapp.loadbalancer.server.port=5000"
-      - "traefik.docker.network=traefik-network"
     networks:
       - traefik-network
 
