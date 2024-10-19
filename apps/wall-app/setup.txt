@@ -1,0 +1,7 @@
+This package requires *dart*
+
+Start it with :
+
+$> dart run /social_wall/bin/social_wall.dart 
+
+Make sure the _uploadDirectory variable points to the directory containing the images of the wall (given in "uploadedFiles" in this archive)
