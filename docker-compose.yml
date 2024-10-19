@@ -1,21 +1,16 @@
 services:
-  traefik:
-    image: traefik:v3.2
-    container_name: traefik
+  nginx:
+    image: nginx:latest
+    container_name: nginx
     restart: always
-    command:
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--providers.file.filename=/etc/traefik/dynamic_conf.yml"
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/certs:/etc/nginx/certs
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - "./config/traefik/dynamic_conf.yml:/etc/traefik/dynamic_conf.yml"
-      - "./config/traefik/certs:/certs"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
-      - traefik-network
+      - nginx-network
   bind9:
     image: internetsystemsconsortium/bind9:9.18
     container_name: bind9
@@ -37,7 +32,7 @@ services:
     volumes:
       - ./apps/bank-app:/var/www/app
     networks:
-      - traefik-network
+      - nginx-network
   wall-app:
     container_name: wall-app
     build:
@@ -45,17 +40,8 @@ services:
       dockerfile: config/wall-app/Dockerfile
     restart: always
     networks:
-      - traefik-network
-  cdn-app:
-    container_name: cdn
-    image: nginx:stable
-    restart: always
-    volumes:
-      - "./apps/cdn-app:/usr/share/nginx/html"
-      - "./config/cdn-app/nginx.conf:/etc/nginx/nginx.conf"
-    networks:
-      - traefik-network
+      - nginx-network
 
 networks:
-  traefik-network:
+  nginx-network:
     driver: bridge
