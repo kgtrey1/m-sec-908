@@ -1,17 +1,26 @@
 ; Zone file for powerzio.net
 $TTL 604800
 @   IN  SOA ns.powerzio.net. admin.powerzio.net. (
-        2       ; Serial
-        604800  ; Refresh
-        86400   ; Retry
-        2419200 ; Expire
-        604800) ; Negative Cache TTL
+        3       ; Serial (increment this number whenever you make changes)
+        604800  ; Refresh (1 week)
+        86400   ; Retry (1 day)
+        2419200 ; Expire (4 weeks)
+        604800) ; Negative Cache TTL (1 week)
 ;
 @       IN  NS      ns.powerzio.net.
+
+; A Records for services
+ns      IN  A       10.0.0.11
 bank    IN  A       10.0.0.11
 wall    IN  A       10.0.0.11
 cdn     IN  A       10.0.0.11
+
+; CNAME Records
 f       IN  CNAME   cdn.powerzio.net.
 beta-f  IN  CNAME   cdn.powerzio.net.
+
+; External services
 google-dns IN A     8.8.8.8
+
+; TXT Records
 powerzio.net. IN TXT "_globalsign-domain-verification=aebu8Cohc2eaF3gae1saa9bee1egh1re"

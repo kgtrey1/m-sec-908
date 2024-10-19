@@ -1,5 +1,4 @@
 zone "powerzio.net" {
     type master;
     file "/etc/bind/db.powerzio.net";
-    allow-query { any; };
 };
