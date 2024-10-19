@@ -70,3 +70,7 @@ tls:
   certificates:
     - certFile: "/certs/bank.powerzio.net.crt"
       keyFile: "/certs/bank.powerzio.net.key"
+    - certFile: "/certs/wall.powerzio.net.crt"
+      keyFile: "/certs/wall.powerzio.net.key"
+    - certFile: "/certs/cdn.powerzio.net.crt"
+      keyFile: "/certs/cdn.powerzio.net.key"
