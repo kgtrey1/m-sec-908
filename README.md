@@ -57,3 +57,7 @@ sudo apt update
  sudo systemctl stop systemd-resolved
 
  sudo systemctl disable systemd-resolved
+
+ sudo apt install prometheus-node-exporter
+
+ ./node_exporter --web.listen-address="127.0.0.1:9100" &

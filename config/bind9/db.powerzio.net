@@ -14,6 +14,7 @@ ns      IN  A       10.0.0.11
 bank    IN  A       10.0.0.11
 wall    IN  A       10.0.0.11
 cdn     IN  A       10.0.0.11
+admin   IN  A       10.0.0.11
 
 ; CNAME Records
 f       IN  CNAME   cdn.powerzio.net.
