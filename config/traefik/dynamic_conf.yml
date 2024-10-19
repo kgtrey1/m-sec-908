@@ -7,19 +7,36 @@ http:
       service: bankapp-service
       middlewares:
         - redirect-to-https
-
     bankapp-router-https:
       rule: "Host(`bank.powerzio.net`)"
       entryPoints:
         - websecure
       service: bankapp-service
       tls: {}
+    
+    wallapp-router-http:
+      rule: "Host(`wall.powerzio.net`)"
+      entryPoints:
+        - web
+      service: wallapp-service
+      middlewares:
+        - redirect-to-https
+    wallapp-router-https:
+      rule: "Host(`wall.powerzio.net`)"
+      entryPoints:
+        - websecure
+      service: wallapp-service
+      tls: {}
 
   services:
     bankapp-service:
       loadBalancer:
         servers:
-          - url: "http://bank-app:5000"
+          - url: "http://wall-app:80"
+    wallapp-service:
+      loadBalancer:
+        servers:
+          - url: "http://wall-app:80"
 
   middlewares:
     redirect-to-https:
@@ -31,3 +48,5 @@ tls:
   certificates:
     - certFile: "/certs/bank.crt"
       keyFile: "/certs/bank.key"
+    - certFile: "/certs/wall.crt"
+      keyFile: "/certs/wall.key"

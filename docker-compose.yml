@@ -40,6 +40,14 @@ services:
       - ./apps/bank-app:/var/www/app
     networks:
       - traefik-network
+  wall-app:
+    container_name: wall-app
+    build:
+      context: .
+      dockerfile: config/wall-app/Dockerfile
+    restart: always
+    networks:
+      - traefik-network
 
 networks:
   traefik-network:
