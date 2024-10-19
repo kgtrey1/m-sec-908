@@ -48,6 +48,12 @@ services:
     restart: always
     networks:
       - traefik-network
+  cdn-app:
+    container_name: cdn
+    image: nginx:stable
+    volumes:
+      - "./apps/cdn-app:/usr/share/nginx/html"
+      - "./config/cdn-app/nginx.conf:/etc/nginx/nginx.conf"
 
 networks:
   traefik-network:
