@@ -12,8 +12,8 @@ services:
       - "10.0.0.11:53:80:80"
       - "10.0.0.11:53:443:443"
     volumes:
-      - "/path/to/certs:/certs"
-      - "./dynamic_conf.yml:/etc/traefik/dynamic_conf.yml"
+      - "./config/traefik/certs:/certs"
+      - "./config/traefik/dynamic_conf.yml:/etc/traefik/dynamic_conf.yml"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - traefik-network

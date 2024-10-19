@@ -2,13 +2,5 @@ tls:
   certificates:
     - certFile: "/certs/bank.crt"
       keyFile: "/certs/bank.key"
-      stores:
-        - default
-      domains:
-        - main: "bank.powerzio.net"
     - certFile: "/certs/wall.crt"
       keyFile: "/certs/wall.key"
-      stores:
-        - default
-      domains:
-        - main: "wall.powerzio.net"
