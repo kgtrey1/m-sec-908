@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:alfred/alfred.dart';
 import 'package:process_run/shell.dart';
+import 'package:mime/mime.dart';
+import 'package:uuid/uuid.dart';
 
 final _uploadDirectory = Directory('uploadedFiles');
+final uuid = Uuid();
 
 Future serve() async {
   final app = Alfred();
@@ -41,15 +44,26 @@ Future serve() async {
     final uploadedFile = (body['file'] as HttpBodyFileUpload);
     var fileBytes = (uploadedFile.content as List<int>);
 
+    final mimeType = lookupMimeType(uploadedFile.filename, headerBytes: fileBytes);
+    if (mimeType == null || !(mimeType.startsWith('image/png') || mimeType.startsWith('image/jpeg'))) {
+      res.statusCode = HttpStatus.unsupportedMediaType;
+      res.write("Unsupported file type. Only PNG and JPEG images are allowed.");
+      return;
+    }
+
+    if (uploadedFile == null || !uploadedFile.filename.endsWith('.png') && !uploadedFile.filename.endsWith('.jpg')) {
+      res.statusCode = HttpStatus.unsupportedMediaType;
+      res.write("Unsupported file type");
+      return;
+    }
+    final fileExtension = uploadedFile.filename.split('.').last;
+    final filename = '${uuid.v4()}.$fileExtension';
+
     final file =
-        await File('${_uploadDirectory.absolute.path}/${uploadedFile.filename}')
+        await File('${_uploadDirectory.absolute.path}/${filename}')
             .writeAsBytes(fileBytes);
 
-    final cmd =
-        'convert ${file.path} -gravity center -extent 200x200 ${file.path}';
-
-    var shell = Shell();
-    await shell.run("bash -c '$cmd'");
+    await Process.run('convert', [file.path, '-gravity', 'center', '-extent', '200x200', file.path]);
 
     res.headers.contentType = ContentType.html;
 

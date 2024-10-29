@@ -14,4 +14,6 @@ dev_dependencies:
   test: ^1.21.0
 dependencies:
   alfred: ^1.0.0+1
+  mime: ^1.0.6
   process_run: ^0.12.3+2
+  uuid: ^4.5.1
