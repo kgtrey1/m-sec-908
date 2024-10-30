@@ -31,7 +31,7 @@ sudo ufw --force enable
 sudo systemctl enable ufw
 
 # Fail2Ban
-sudo cp config/local/jail.local /etc/fail2ban/fail2ban/jail.local
+sudo cp config/local/jail.local /etc/fail2ban/jail.local
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
 
