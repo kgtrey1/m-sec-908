@@ -2,7 +2,6 @@ Include /etc/ssh/sshd_config.d/*.conf
 
 LoginGraceTime 30
 PermitRootLogin no
-MaxAuthTries 1
 MaxSessions 3
 ClientAliveInterval 120
 
