@@ -19,10 +19,6 @@ sudo chown -R powerzio:powerzio /home/powerzio/.ssh
 sudo cp config/local/sshd_config /etc/ssh/sshd_config
 sudo systemctl restart ssh
 
-# Free port 53
-sudo systemctl stop systemd-resolved
-sudo systemctl disable systemd-resolved
-
 # Wireguard
 sudo cp config/wg0.conf /etc/wireguard/wg0.conf
 sudo wg-quick up wg0
