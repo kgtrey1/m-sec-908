@@ -1,5 +1,7 @@
 Include /etc/ssh/sshd_config.d/*.conf
 
+LogLevel VERBOSE
+
 LoginGraceTime 30
 PermitRootLogin no
 MaxSessions 3
