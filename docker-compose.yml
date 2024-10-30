@@ -31,7 +31,7 @@ services:
       dockerfile: config/bank-app/Dockerfile
     restart: always
     volumes:
-      - ./apps/bank-app:/var/www/app
+      - ./apps/bank-app:/var/www/bank.powerzio.net
     networks:
       - nginx-network
   wall-app:
