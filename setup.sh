@@ -20,7 +20,7 @@ sudo cp config/local/sshd_config /etc/ssh/sshd_config
 sudo systemctl restart ssh
 
 # Wireguard
-sudo cp config/wg0.conf /etc/wireguard/wg0.conf
+sudo cp config/local/wg0.conf /etc/wireguard/wg0.conf
 sudo wg-quick up wg0
 sudo systemctl enable wg-quick@wg0
 
