@@ -32,6 +32,8 @@ export class AppController {
 
     formData.append('email', data.email);
     formData.append('password', data.password);
+    formData.append('first_name', data.first_name);
+    formData.append('last_name', data.last_name);
     return this.appService.proxy('/register', formData);
   }
 }
