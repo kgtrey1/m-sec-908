@@ -6,9 +6,6 @@ services:
     container_name: nginx
     restart: always
     volumes:
-      - ./config/nginx/modsecurity.conf:/etc/modsecurity.d/modsecurity.conf
-      - ./config/nginx/nginx.conf:/etc/nginx/conf.d/proxy.conf:ro
-      - ./config/nginx/certs:/etc/nginx/certs
       - ./apps/cdn-app:/usr/share/nginx/html/cdn
     ports:
       - "80:80"
