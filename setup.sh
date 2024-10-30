@@ -1,16 +1,14 @@
 #!/bin/bash
+
 sudo apt update -y
 
 # Install dependencies
 sudo apt install -y ca-certificates curl ufw wireguard
 
-
 # User
 sudo useradd -m -s /bin/bash powerzio
 echo "powerzio:123456" | sudo chpasswd
 sudo usermod -aG sudo powerzio
-
-
 
 # Setup SSH
 sudo mkdir -p /home/powerzio/.ssh
@@ -21,6 +19,9 @@ sudo chown -R powerzio:powerzio /home/powerzio/.ssh
 sudo cp config/local/sshd_config /etc/ssh/sshd_config
 sudo systemctl restart ssh
 
+# Free port 53
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
 
 # Docker install
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -34,9 +35,3 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose
 sudo usermod -aG docker powerzio
 sudo newgrp docker
-
-# Free port 53
-# sudo systemctl stop systemd-resolved
-# sudo systemctl disable systemd-resolved
-
-# sudo apt install wireguard
