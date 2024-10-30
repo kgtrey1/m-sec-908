@@ -1,6 +1,8 @@
 services:
   nginx:
-    image: owasp/modsecurity-crs:nginx-alpine
+    build:
+      context: .
+      dockerfile: config/nginx/Dockerfile
     container_name: nginx
     restart: always
     volumes:
