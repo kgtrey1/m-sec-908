@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:latest
+    image: owasp/modsecurity-crs:nginx-alpine
     container_name: nginx
     restart: always
     volumes:
@@ -39,14 +39,6 @@ services:
     build:
       context: .
       dockerfile: config/wall-app/Dockerfile
-    restart: always
-    networks:
-      - nginx-network
-  proxy-app:
-    container_name: proxy-app
-    build:
-      context: .
-      dockerfile: config/proxy/Dockerfile
     restart: always
     networks:
       - nginx-network
