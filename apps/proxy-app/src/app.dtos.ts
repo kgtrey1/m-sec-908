@@ -16,12 +16,12 @@ export class RegisterDto {
   @IsString()
   @Matches(/^[A-Za-z]+$/, { message: 'First name contains invalid characters' })
   @Transform(({ value }) => value.trim())
-  firstName: string;
+  first_name: string;
 
   @IsString()
   @Matches(/^[A-Za-z]+$/, { message: 'Last name contains invalid characters' })
   @Transform(({ value }) => value.trim())
-  lastName: string;
+  last_name: string;
 }
 
 export class LoginDto {
@@ -29,7 +29,7 @@ export class LoginDto {
   @Matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, {
     message: 'Email contains invalid characters',
   })
-  email: string;
+  login: string;
 
   @IsString()
   @MinLength(8, { message: 'Password must be at least 8 characters long' })
