@@ -11,4 +11,4 @@ COPY ./apps/proxy-app /var/www/proxy.local
 RUN rm -rf node_modules
 RUN yarn && yarn build
 
-CMD yarn start
+CMD yarn start:dev

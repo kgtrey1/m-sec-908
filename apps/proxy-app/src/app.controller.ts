@@ -29,11 +29,15 @@ export class AppController {
       const resp = await this.appService.proxy('/login', formData);
       const cookies = resp.headers['set-cookie'];
       if (cookies) {
+        console.log(cookies);
         res.setHeader('Set-Cookie', cookies);
+      } else {
+        console.log('no cookies');
       }
       res.redirect('/?view=profile');
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
+      console.log(e);
       res.redirect('/?view=login&error=Invalid login or password');
     }
   }
