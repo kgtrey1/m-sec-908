@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: owasp/modsecurity-crs:nginx-alpine
+    image: nginx:latest
     container_name: nginx
     restart: always
     volumes:
