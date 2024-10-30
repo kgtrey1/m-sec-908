@@ -104,11 +104,6 @@ def login():
 
 @app.route('/api/register', methods=['POST'])
 def register():
-    print(request.form.get('email'))
-    print(request.form.get('first_name'))
-    print(request.form.get('last_name'))
-    print(request.form.get('password'))
-
     if request.form.get('email'):
         if request.form.get('password'):
             if request.form.get('last_name') and request.form.get('first_name'):
