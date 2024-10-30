@@ -1,7 +1,18 @@
-Include /etc/ssh/ssh_config.d/*.conf
+Include /etc/ssh/sshd_config.d/*.conf
 
-Host *
-SendEnv LANG LC_*
-HashKnownHosts yes
-PasswordAuthentication yes
+LoginGraceTime 30
+PermitRootLogin no
+MaxAuthTries 1
+MaxSessions 3
+ClientAliveInterval 120
+
 PubkeyAuthentication yes
+PasswordAuthentication yes
+KbdInteractiveAuthentication no
+ChallengeResponseAuthentication no
+
+UsePAM yes
+
+AcceptEnv LANG LC_*
+
+AllowUsers powerzio
