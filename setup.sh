@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt update && sudo apt upgrade
+sudo apt update -y
 
 # Install dependencies
 sudo apt install -y ca-certificates curl ufw wireguard
