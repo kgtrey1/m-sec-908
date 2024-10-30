@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Injectable, HttpException } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
@@ -8,11 +7,18 @@ import { AxiosResponse } from 'axios';
 export class AppService {
   constructor(private readonly httpService: HttpService) {}
 
-  async proxy(endpoint: string, dto: unknown): Promise<AxiosResponse> {
+  async proxy(endpoint: string, data: URLSearchParams): Promise<AxiosResponse> {
     try {
-        console.log(endpoint)
       const response = await lastValueFrom(
-        this.httpService.post(`http://bank-app:5000/api${endpoint}`, dto),
+        this.httpService.post(
+          `http://bank-app:5000/api${endpoint}`,
+          data.toString(),
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          },
+        ),
       );
       return response;
     } catch (error) {

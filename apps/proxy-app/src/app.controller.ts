@@ -9,16 +9,29 @@ export class AppController {
 
   @Post('transfer')
   async transfer(@Body() data: TransferDto) {
-    return this.appService.proxy('/transfer', data);
+    const formData = new URLSearchParams();
+
+    formData.append('sum', data.sum);
+    formData.append('pin', data.pin);
+    formData.append('recipient', data.recipient);
+    return this.appService.proxy('/transfer', formData);
   }
 
   @Post('/login')
   async login(@Body() data: LoginDto) {
-    return this.appService.proxy('/login', data);
+    const formData = new URLSearchParams();
+
+    formData.append('login', data.login);
+    formData.append('password', data.password);
+    return this.appService.proxy('/login', formData);
   }
 
   @Post('register')
   async register(@Body() data: RegisterDto) {
-    return this.appService.proxy('/register', data);
+    const formData = new URLSearchParams();
+
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+    return this.appService.proxy('/register', formData);
   }
 }
