@@ -19,12 +19,23 @@ export class AppController {
   }
 
   @Post('/login')
-  async login(@Body() data: LoginDto) {
+  async login(@Body() data: LoginDto, @Res() res: Response) {
     const formData = new URLSearchParams();
 
     formData.append('login', data.login);
     formData.append('password', data.password);
-    return this.appService.proxy('/login', formData);
+
+    try {
+      const resp = await this.appService.proxy('/login', formData);
+      const cookies = resp.headers['set-cookie'];
+      if (cookies) {
+        res.setHeader('Set-Cookie', cookies);
+      }
+      res.redirect('/?view=profile');
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e) {
+      res.redirect('/?view=login&error=Invalid login or password');
+    }
   }
 
   @Post('register')
