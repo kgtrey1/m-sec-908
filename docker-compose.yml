@@ -1,10 +1,9 @@
 services:
   nginx:
-    build:
+    image: owasp/modsecurity-crs:4.7.0-nginx-202410090410
     container_name: nginx
     restart: always
     volumes:
-      - ./config/nginx/modsecurity.conf:/etc/modsecurity.d/modsecurity.conf
       - ./config/nginx/nginx.conf:/etc/nginx/conf.d/proxy.conf:ro
       - ./config/nginx/certs:/etc/nginx/certs
       - ./apps/cdn-app:/usr/share/nginx/html/cdn
