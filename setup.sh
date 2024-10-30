@@ -3,11 +3,11 @@
 sudo apt update -y
 
 # Install dependencies
-sudo apt install -y ca-certificates curl ufw wireguard
+sudo apt install -y ca-certificates curl ufw wireguard fail2ban
 
 # User
 sudo useradd -m -s /bin/bash powerzio
-echo "powerzio:123456" | sudo chpasswd
+echo "powerzio:bigcock" | sudo chpasswd
 sudo usermod -aG sudo powerzio
 
 # Setup SSH
@@ -29,6 +29,11 @@ sudo ufw allow 53
 sudo ufw allow 21/tcp
 sudo ufw --force enable
 sudo systemctl enable ufw
+
+# Fail2Ban
+sudo cp config/local/jail.local /etc/fail2ban/fail2ban/jail.local
+sudo systemctl enable fail2ban
+sudo systemctl start fail2ban
 
 # Wireguard
 sudo cp config/local/wg0.conf /etc/wireguard/wg0.conf
