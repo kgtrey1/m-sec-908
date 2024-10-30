@@ -23,6 +23,17 @@ sudo systemctl restart ssh
 sudo systemctl stop systemd-resolved
 sudo systemctl disable systemd-resolved
 
+# Wireguard
+sudo cp config/wg0.conf /etc/wireguard/wg0.conf
+sudo wg-quick up wg0
+sudo systemctl enable wg-quick@wg0
+
+# Project
+mkdir -p /home/powerzio/m-sec-908
+cp -R ./* /home/powerzio/m-sec-908
+sudo chown -R powerzio:powerzio /home/powerzio/m-sec-908
+rm -rf *
+
 # Docker install
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
