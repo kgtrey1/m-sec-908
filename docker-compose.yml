@@ -42,6 +42,14 @@ services:
     restart: always
     networks:
       - nginx-network
+  proxy-app:
+    container_name: proxy-app
+    build:
+      context: .
+      dockerfile: config/proxy/Dockerfile
+    restart: always
+    networks:
+      - nginx-network
 
 networks:
   nginx-network:

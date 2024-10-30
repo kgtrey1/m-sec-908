@@ -61,3 +61,9 @@ sudo apt update
  sudo apt install prometheus-node-exporter
 
  ./node_exporter --web.listen-address="127.0.0.1:9100" &
+
+
+
+ kiki@gmail.com
+ tototiti
+ 7851202734
