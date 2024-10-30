@@ -19,6 +19,17 @@ sudo chown -R powerzio:powerzio /home/powerzio/.ssh
 sudo cp config/local/sshd_config /etc/ssh/sshd_config
 sudo systemctl restart ssh
 
+# UFW
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 53
+sudo ufw allow 21/tcp
+sudo ufw --force enable
+sudo systemctl enable ufw
+
 # Wireguard
 sudo cp config/local/wg0.conf /etc/wireguard/wg0.conf
 sudo wg-quick up wg0
