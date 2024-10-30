@@ -3,7 +3,11 @@
 sudo apt update -y
 
 # Install dependencies
-sudo apt install -y ca-certificates curl ufw wireguard fail2ban
+sudo apt install -y ca-certificates curl ufw wireguard fail2ban rsyslog
+
+# Logs
+sudo systemctl start rsyslog
+sudo systemctl enable rsyslog
 
 # User
 sudo useradd -m -s /bin/bash powerzio
