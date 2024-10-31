@@ -1,20 +1,25 @@
 services:
   nginx:
-    image: owasp/modsecurity-crs:nginx-alpine
     container_name: nginx
+    image: owasp/modsecurity:nginx
     restart: always
     volumes:
-      - ./config/nginx/nginx.conf:/etc/nginx/templates/conf.d/default.conf.template
       - ./config/nginx/certs:/etc/nginx/certs
+      - ./config/nginx/modsecurity:/etc/modsecurity
+      - ./config/nginx/modsecurity.d/include.conf:/etc/modsecurity.d/include.conf
+      - ./config/nginx/modsecurity.d/modsecurity.conf:/etc/modsecurity.d/modsecurity.conf
+      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.template
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./apps/cdn-app:/usr/share/nginx/html/cdn
+      - ./log/nginx:/var/log/modsecurity/debug.log
     ports:
-      - "80:8080"
-      - "443:8443"
+      - "80:80"
+      - "443:443"
     networks:
       - nginx-network
     environment:
-      - PARANOIA=4
-      - MODSEC_RULE_ENGINE=On
+      - SERVERNAME=localhost
+    command: /bin/bash -c "envsubst '$$SERVERNAME' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
   bind9:
     image: internetsystemsconsortium/bind9:9.18
     container_name: bind9
