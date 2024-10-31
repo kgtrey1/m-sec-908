@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: owasp/modsecurity-crs:4.7.0-nginx-202410090410
+    image: owasp/modsecurity-crs:nginx-alpine
     container_name: nginx
     restart: always
     volumes:
@@ -12,36 +12,9 @@ services:
       - "443:8443"
     networks:
       - nginx-network
-  bind9:
-    image: internetsystemsconsortium/bind9:9.18
-    container_name: bind9
-    restart: always
-    ports:
-      - "10.0.0.11:53:53/tcp"
-      - "10.0.0.11:53:53/udp"
-    volumes:
-      - "./config/bind9/named.conf:/etc/bind/named.conf"
-      - "./config/bind9/named.conf.local:/etc/bind/named.conf.local"
-      - "./config/bind9/named.conf.options:/etc/bind/named.conf.options"
-      - "./config/bind9/db.powerzio.net:/etc/bind/db.powerzio.net"
-  bank-app:
-    container_name: bank-app
-    build:
-      context: .
-      dockerfile: config/bank-app/Dockerfile
-    restart: always
-    volumes:
-      - ./apps/bank-app:/var/www/bank.powerzio.net
-    networks:
-      - nginx-network
-  wall-app:
-    container_name: wall-app
-    build:
-      context: .
-      dockerfile: config/wall-app/Dockerfile
-    restart: always
-    networks:
-      - nginx-network
+    environment:
+      - PARANOIA=4
+      - MODSEC_RULE_ENGINE=On
 
 networks:
   nginx-network:
