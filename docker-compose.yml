@@ -11,7 +11,6 @@ services:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.template
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./apps/cdn-app:/usr/share/nginx/html/cdn
-      - ./log/nginx:/var/log/modsecurity/debug.log
     ports:
       - "80:80"
       - "443:443"
