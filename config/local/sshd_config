@@ -16,4 +16,4 @@ UsePAM yes
 
 AcceptEnv LANG LC_*
 
-AllowUsers powerzio
+AllowUsers powerzio admin
