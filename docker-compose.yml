@@ -50,7 +50,7 @@ services:
     networks:
       - nginx-network
     volumes:
-      - ./apps/wall-app:/var/www/wall.powerzio.net
+      - ./apps/wall-app/uploadedFiles:/var/www/wall.powerzio.net/uploadedFiles
 
 networks:
   nginx-network:
