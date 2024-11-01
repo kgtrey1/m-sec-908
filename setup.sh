@@ -12,7 +12,6 @@ sudo systemctl enable rsyslog
 # User
 sudo useradd -m -s /bin/bash powerzio
 echo "powerzio:bigcock" | sudo chpasswd
-sudo usermod -aG sudo powerzio
 
 # Setup SSH
 sudo mkdir -p /home/powerzio/.ssh
