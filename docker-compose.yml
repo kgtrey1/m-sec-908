@@ -49,6 +49,8 @@ services:
     restart: always
     networks:
       - nginx-network
+    volumes:
+      - ./apps/wall-app:/var/www/wall.powerzio.net
 
 networks:
   nginx-network:
