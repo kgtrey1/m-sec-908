@@ -8,6 +8,6 @@ WORKDIR /var/www/wall.powerzio.net
 
 RUN apt-get update && apt-get install -y imagemagick
 RUN dart pub get
-RUN dart compile exe bin/social_wall.dart -o /var/www/wall/wall.powerzio.net
+RUN dart compile exe bin/social_wall.dart -o /var/www/wall/wall.powerzio.net/app
 
 CMD [ "./app" ]
